@@ -33,7 +33,7 @@ services:
       - /tmp/kestra-wd:/tmp/kestra-wd
     environment:
       # encode string with command -> echo -n "VALUE" | base64
-      SECRET_DISCORD_WEBHOOK: "ENCODED DISCORD WEBHOOK URL"
+      #SECRET_DISCORD_WEBHOOK: "ENCODED DISCORD WEBHOOK URL"
       KESTRA_CONFIGURATION: |
         datasources:
           postgres:

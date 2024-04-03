@@ -1,16 +1,15 @@
 - name: Play 1
   hosts: localhost
   tasks:
+    - name: Who am I
+      ansible.builtin.command: whoami
+      register: _command
 
-     - name: Who am I
-       ansible.builtin.command: whoami
-       register: _command
-
-     - name: debug
-       ansible.builtin.debug:
-         var: _command.stdout
+    - name: debug
+      ansible.builtin.debug:
+        var: _command.stdout
 
     - name: Create Hello World file
       ansible.builtin.copy:
         content: "Hello World"
-        dest: /home/monger/hello-world.txt         
+        dest: /home/monger/hello-world.txt

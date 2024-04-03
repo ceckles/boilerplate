@@ -33,7 +33,7 @@ services:
       - /tmp/kestra-wd:/tmp/kestra-wd
     environment:
       # encode string with command -> echo -n "VALUE" | base64
-      #SECRET_DISCORD_WEBHOOK: "ENCODED DISCORD WEBHOOK URL"
+      SECRET_DISCORD_WEBHOOK: "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIyNDkwODk0NzMwODI4MTg4Ni9NVHlQaHZMNUlTRzMtb0dXUTFPelZPbFhmYWxkOGRxR2xWbzRuOWdOSjd3eW0xdXVPTER2TzZpM0JfTUIzVUttMmVhRg=="
       KESTRA_CONFIGURATION: |
         datasources:
           postgres:
@@ -64,3 +64,4 @@ services:
       - "8081:8081"
     depends_on:
       postgres:
+        condition: service_started

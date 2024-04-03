@@ -25,6 +25,8 @@ services:
     pull_policy: always
     # Note that this is meant for development only. Refer to the documentation for production deployments of Kestra which runs without a root user.
     user: "root"
+    env_file:
+      - .env_encoded
     restart: unless-stopped
     command: server standalone --worker-thread=128
     volumes:
@@ -32,8 +34,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/kestra-wd:/tmp/kestra-wd
     environment:
-      # encode string with command -> echo -n "VALUE" | base64
-      #SECRET_DISCORD_WEBHOOK: "DISCORD WEBHOOK URL ENCODED"
       KESTRA_CONFIGURATION: |
         datasources:
           postgres:
@@ -44,8 +44,8 @@ services:
         kestra:
           server:
             basic-auth:
-              enabled: false
-              username: "admin@kestra.io" # it must be a valid email address
+              enabled: true
+              username: "chad1020@gmail.com" # it must be a valid email address
               password: kestra
           repository:
             type: postgres

@@ -1,4 +1,4 @@
-id: RELOADDATA-HTTP-STATUS
+id: SERVER-HTTP-STATUS
 namespace: reloaddata
 
 inputs:

@@ -1,5 +1,5 @@
 id: SERVER-HTTP-STATUS
-namespace: reloaddata
+namespace: homeserver
 
 inputs:
   - id: url

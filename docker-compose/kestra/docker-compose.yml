@@ -44,8 +44,8 @@ services:
         kestra:
           server:
             basic-auth:
-              enabled: true
-              username: "chad1020@gmail.com" # it must be a valid email address
+              enabled: false
+              username: "user@domain.com" # it must be a valid email address
               password: kestra
           repository:
             type: postgres

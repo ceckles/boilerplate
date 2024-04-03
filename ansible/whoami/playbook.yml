@@ -1,6 +1,11 @@
 - name: Play 1
-  hosts: all
+  hosts: localhost
   tasks:
 
-    - name: Who am I
-      ansible.builtin.command: whoami
+     - name: Who am I
+       ansible.builtin.command: whoami
+       register: _command
+
+     - name: debug
+       ansible.builtin.debug:
+         var: _command

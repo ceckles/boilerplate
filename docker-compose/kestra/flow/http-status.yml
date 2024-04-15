@@ -1,36 +1,21 @@
-id: SERVER-HTTP-STATUS
-namespace: homeserver
+id: RELOAD-HTTP-STATUS
+namespace: reloaddata
 
 inputs:
-  - id: url
-    type: STRING
+  - id: uri
+    type: URI
     required: true
     defaults:
       - "https://google.com"
 
 tasks:
-  - id: pythonscript
-    type: io.kestra.plugin.scripts.python.Script
-    runner: DOCKER
-    script: |
-      import requests 
-      from kestra import Kestra
-      import warnings
+  - id: api
+    type: io.kestra.plugin.fs.http.Request
+    uri: "{{ inputs.uri }}"
 
-      warnings.filterwarnings('ignore', message='Unverified HTTPS request')
-
-      try:
-        response = requests.get('{{inputs.url}}', verify=False)
-        print(response.status_code)
-
-        Kestra.outputs({'status_code': response.status_code, 'text': response.text})
-      except Exception as e:
-        Kestra.outputs({'status_code': 0})
-    beforeCommands:
-      - pip install requests kestra
-  - id: if
+  - id: check_status
     type: io.kestra.core.tasks.flows.If
-    condition: "{{outputs.pythonscript.vars.status_code != 200}}"
+    condition: "{{ outputs.api.code != 200 }}"
     then:
       - id: logError
         type: io.kestra.core.tasks.log.Log
@@ -50,5 +35,5 @@ tasks:
 triggers:
   - id: schedule_trigger
     type: io.kestra.core.models.triggers.types.Schedule
-    cron: '*/15 * * * *'
-    inputs: {url: 'https://google.com'}
+    cron: '*/30 * * * *'
+    inputs: {url: 'https://reloaddata.app'}

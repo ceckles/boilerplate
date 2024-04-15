@@ -34,6 +34,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/kestra-wd:/tmp/kestra-wd
     environment:
+      #SECRET_DISCORD_WEBHOOK: "DISCORD SERVER WEBHOOK ENCODED or import from .env_encoded"
+      #SECRET encode string with command -> echo -n "VALUE" | base64
       KESTRA_CONFIGURATION: |
         datasources:
           postgres:
